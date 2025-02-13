@@ -38,3 +38,7 @@ class Block:
                 (str): The hash of the block with a dynamic change whenever any data of the block is changed.
         """
         return self._hashInst.hash(self.data+str(self.index)+self.previousHash+str(self.timestamp()))
+
+    def __repr__(self):
+        return (f'data: {self.data}, index: {self.index}, '
+                f'previousHash: {self.previousHash}, timestamp: {self.timestamp}, blockHash: {self.blockHash}')
