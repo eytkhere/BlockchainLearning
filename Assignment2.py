@@ -14,27 +14,24 @@ class Block:
     """
     data: str
     index: int = 0
-    previousHash: str = None
-    _hashInst = Hasher()
-
-    @staticmethod
-    def timestamp() -> float:
-        """
-        ::
-            Static method of calculating the timestamp.
-
-            Return:
-                (float): The timestamp.
-        """
-        return datetime.timestamp(datetime.now())
+    previousHash: str = "0"
+    instHash: str = "0"
+    nonce: int = 0
+    timestampInstBlock: float = datetime.timestamp(datetime.now())
+    _hashInst: Hasher = Hasher()
 
     @property
     def blockHash(self) -> str:
         """
         ::
-            A function that implements @property that computes the block's hash dynamically when accessed.
+            A function that computes the block's hash dynamically when accessed.
 
             Return:
                 (str): The hash of the block with a dynamic change whenever any data of the block is changed.
         """
-        return self._hashInst.hash(self.data+str(self.index)+self.previousHash+str(self.timestamp()))
+        return self._hashInst.hash(self.data+str(self.index) +
+                                            self.previousHash+ str(self.timestampInstBlock) + str(self.nonce))
+
+    def __repr__(self) -> str:
+        return (f'data: {self.data}, index: {self.index}, '
+                f'previousHash: {self.previousHash}, timestamp: {self.timestampInstBlock}, blockHash: {self.blockHash}')

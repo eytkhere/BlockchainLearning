@@ -18,7 +18,7 @@ class Hasher:
         ::
             Function that hashes the input data using the selected algorithm.
 
-            Input:
+            Parameters:
                 data (str): The data wanted to be hashed.
 
             Return:
