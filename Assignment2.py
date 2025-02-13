@@ -16,7 +16,17 @@ class Block:
     index: int = 0
     previousHash: str = None
     _hashInst = Hasher()
-    timestamp: float = datetime.timestamp(datetime.now())
+
+    @staticmethod
+    def timestamp() -> float:
+        """
+        ::
+            Static method of calculating the timestamp.
+
+            Return:
+                (float): The timestamp.
+        """
+        return datetime.timestamp(datetime.now())
 
     @property
     def blockHash(self) -> str:
@@ -27,4 +37,4 @@ class Block:
             Return:
                 (str): The hash of the block with a dynamic change whenever any data of the block is changed.
         """
-        return self._hashInst.hash(self.data+str(self.index)+self.previousHash+str(self.timestamp))
+        return self._hashInst.hash(self.data+str(self.index)+self.previousHash+str(self.timestamp()))
